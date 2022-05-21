@@ -12,7 +12,7 @@ class Login extends Component
 
     public function render()
     {
-        return view('livewire.admin.auth.login')->layout('layouts.admin-login');
+        return view('livewire.admin.auth.login')->layout('layouts.admin-login', ['title' => 'Show Posts']);
     }
 
     public function login()
@@ -22,6 +22,9 @@ class Login extends Component
         if($admin){
             return redirect(route('admin.dashboard'));
         }else{
+            session()->flash('error', 'Invlalid credentials.');
+
+            return view('livewire.admin.auth.login')->layout('layouts.admin-login', ['title' => 'Show Posts']);
             dd("invalid username and password");
         }
     }
